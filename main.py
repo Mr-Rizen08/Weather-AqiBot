@@ -7,7 +7,7 @@ from aiogram.fsm.context import FSMContext
 from weaterinfo import get_weater
 from keyboard import weatherbot_start
 
-bot = Bot("8217366562:AAFcmF9ioD2oJrEKvRzADvxBIxN6NKf5nq8")
+bot = Bot("")
 dp = Dispatcher()
 
 @dp.message(CommandStart())
