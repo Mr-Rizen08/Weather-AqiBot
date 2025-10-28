@@ -2,7 +2,7 @@ import requests
 
 def get_weather(city):
     parameters = {
-        'appid': '',
+        'appid': '#',
         'units': 'metric',
         'lang': 'ru'
     }

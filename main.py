@@ -7,7 +7,7 @@ from aiogram.fsm.context import FSMContext
 from weaterinfo import get_weather, get_aqi
 from keyboard import weatherbot_start
 
-bot = Bot("")
+bot = Bot("#")
 dp = Dispatcher()
 
 @dp.message(CommandStart())
@@ -27,7 +27,7 @@ async def weather_result_handler(message:Message):
     result = get_weather(message.text)
     await message.answer(f"City Name {result['name']}, Timezone {result['timezone']}\n"
                         f"Weather 🌤️ {result['weather'][0]['main']}, {result['weather'][0]['description']}\n"
-                        f"Temperature 🌡️ {result['main']['temp']}, Feels Like {result['main']['feels_like']}\n"
+                        f"Temperature 🌡️ {result['main']['temp']}, Feels Like  {result['main']['feels_like']}\n"
                         f"Visibility {result['visibility']}\n"
                         f"Wind speed 🌬️ {result['wind']['speed']}")
 
