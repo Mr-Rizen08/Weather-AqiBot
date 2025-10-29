@@ -26,10 +26,13 @@ async def air_polution_handler(message:Message):
     result = get_weather(message.text)
     print(result['coord']['lon'], result['coord']['lat'])
     result = get_aqi(result['coord']['lon'], result['coord']['lat'])
-    await message.answer(f" Угарный газ Co [ {result['list'][0]['components']['co']} ]\n"
-                         f" Мелкие частицы Pm2.5 [ {result['list'][0]['components']['pm2_5']} ]\n"
-                         f" Крупные частицы Pm10 [ {result['list'][0]['components']['pm10']} ]\n"
-                         f" Озон O3 [ {result['list'][0]['components']['o3']} ]", reply_markup=end_task_kb())
+    await message.answer(f"Качество воздуха 💨 {aqi_result['list'][0]['main']['aqi']},\n"
+                         f"Угарный газ Co [ {aqi_result['list'][0]['components']['co']} mg/m³],\n"
+                         f"Мелкие частицы Pm2.5 [ {aqi_result['list'][0]['components']['pm2_5']} µg/m³],\n"
+                         f"Крупные частицы Pm10 [ {aqi_result['list'][0]['components']['pm10']} µg/m³],\n"
+                         f"Диоксид серы SO₂ [{aqi_result['list'][0]['components']['so2']} µg/m³],\n"
+                         f"Аммиак NH₃ [{aqi_result['list'][0]['components']['nh3']} µg/m³],\n"
+                         f"Озон O₃ [ {aqi_result['list'][0]['components']['o3']} µg/m³]", reply_markup=end_task_kb())
 
 @router.message(F.text == "End->", StateMod.aqi_search)
 async def end_task_handler(message:Message, state: FSMContext):

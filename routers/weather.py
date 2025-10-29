@@ -22,10 +22,9 @@ async def back_handler(message:Message, state:FSMContext):
 @router.message(F.text, StateMod.weather_search)
 async def weather_result_handler(message:Message):
     result = get_weather(message.text)
-    await message.answer(f"City Name {result['name']}, Timezone {result['timezone']}\n"
-                            f"Weather 🌤️ {result['weather'][0]['main']}, {result['weather'][0]['description']}\n"
-                            f"Temperature 🌡️ {result['main']['temp']}, \nFeels Like {result['main']['feels_like']}\n"
-                            f"Visibility 👀 {result['visibility']}\n"
+    await message.answer(f"City Name {result['name']}, Timezone {result['timezone']},\n"
+                            f"Weather 🌤️ {result['weather'][0]['main']}°C, {result['weather'][0]['description']}°C,\n"
+                            f"Temperature 🌡️ {result['main']['temp']}, \nFeels Like {result['main']['feels_like']},\n"
                             f"Wind speed 🌬️ {result['wind']['speed']} km/h", reply_markup=end_task_kb())
 
 @router.message(F.text == "End->", StateMod.weather_search)
