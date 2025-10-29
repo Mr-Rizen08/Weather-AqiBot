@@ -21,7 +21,7 @@ async def back_handler(message:Message, state:FSMContext):
     await state.set_state(StateMod.search)
 
 @router.message(F.text, StateMod.full_search)
-async def full_handler(message:Message):
+async def full_handler(message:Message, state: FSMContext):
     weather_result = get_weather(message.text)
     aqi_result = get_aqi(weather_result['coord']['lon'], weather_result['coord']['lat'])
     await message.answer(f"City Name {weather_result['name']}, Timezone {weather_result['timezone']},\n"
@@ -35,9 +35,10 @@ async def full_handler(message:Message):
                          f"Диоксид серы SO₂ [{aqi_result['list'][0]['components']['so2']} µg/m³],\n"
                          f"Аммиак NH₃ [{aqi_result['list'][0]['components']['nh3']} µg/m³],\n"
                          f"Озон O₃ [ {aqi_result['list'][0]['components']['o3']} µg/m³]", reply_markup=end_task_kb())
-@router.message(F.text == "End->", StateMod.full_search)
+    await state.set_state(StateMod.end)
+
+@router.message(F.text == "End->", StateMod.end)
 async def end_task_handler(message:Message, state: FSMContext):
-    await message.answer("Вы вернулись")
     await state.clear()
-    await message.answer("Hello", reply_markup=weatherbot_start())
+    await message.answer("Вы вернулись", reply_markup=weatherbot_start())
     await state.set_state(StateMod.search)

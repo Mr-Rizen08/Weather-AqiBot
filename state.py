@@ -5,3 +5,4 @@ class StateMod(StatesGroup):
     aqi_search = State()
     full_search = State()
     search = State()
+    end = State()

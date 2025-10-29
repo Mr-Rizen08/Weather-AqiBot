@@ -20,16 +20,16 @@ async def back_handler(message:Message, state:FSMContext):
     await state.set_state(StateMod.search)
 
 @router.message(F.text, StateMod.weather_search)
-async def weather_result_handler(message:Message):
-    result = get_weather(message.text)
+async def weather_result_handler(message:Message, state: FSMContext):
+    result = get_weather(message.text, )
     await message.answer(f"City Name {result['name']}, Timezone {result['timezone']},\n"
                             f"Weather 🌤️ {result['weather'][0]['main']}°C, {result['weather'][0]['description']}°C,\n"
                             f"Temperature 🌡️ {result['main']['temp']}, \nFeels Like {result['main']['feels_like']},\n"
                             f"Wind speed 🌬️ {result['wind']['speed']} km/h", reply_markup=end_task_kb())
+    await state.set_state(StateMod.end)
 
-@router.message(F.text == "End->", StateMod.weather_search)
+@router.message(F.text == "End->", StateMod.end)
 async def end_task_handler(message:Message, state: FSMContext):
-    await message.answer("Вы вернулись")
     await state.clear()
-    await message.answer("Hello", reply_markup=weatherbot_start())
+    await message.answer("Вы вернулись", reply_markup=weatherbot_start())
     await state.set_state(StateMod.search)
