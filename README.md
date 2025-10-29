@@ -1,3 +1,3 @@
-__WeatherBot__
+__Weather/AqiBot__
 
-More Updates soon
+_This bot is made for Telegram. It shows the weather 🌤️ and air pollution levels 💨_
