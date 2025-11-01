@@ -3,7 +3,7 @@ from aiogram.types import Message
 from state import StateMod
 from aiogram.fsm.context import FSMContext
 from weaterinfo import get_weather
-from keyboard import back_kb, weatherbot_start, end_task_kb
+from keyboard import back_kb, weatherbot_start
 
 router = Router()
 
@@ -21,7 +21,7 @@ async def back_handler(message:Message, state:FSMContext):
 
 @router.message(F.text, StateMod.weather_search)
 async def weather_result_handler(message:Message, state: FSMContext):
-    result = get_weather(message.text, )
+    result = get_weather(message.text)
     await message.answer(f"City Name {result['name']}, Timezone {result['timezone']},\n"
                             f"Weather 🌤️ {result['weather'][0]['main']}°C, {result['weather'][0]['description']}°C,\n"
                             f"Temperature 🌡️ {result['main']['temp']}, \nFeels Like {result['main']['feels_like']},\n"

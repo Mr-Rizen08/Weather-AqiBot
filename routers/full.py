@@ -1,7 +1,7 @@
 from aiogram import F, Router
 from state import StateMod
 from aiogram.fsm.context import FSMContext
-from keyboard import back_kb, weatherbot_start, end_task_kb
+from keyboard import back_kb, weatherbot_start
 from weaterinfo import get_aqi, get_weather
 from aiogram.types import Message
 

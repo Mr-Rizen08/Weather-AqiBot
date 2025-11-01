@@ -3,7 +3,7 @@ from aiogram.types import Message
 from state import StateMod
 from aiogram.fsm.context import FSMContext
 from weaterinfo import get_aqi, get_weather
-from keyboard import back_kb, weatherbot_start, end_task_kb
+from keyboard import back_kb, weatherbot_start
 
 
 router = Router()
