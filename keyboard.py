@@ -12,9 +12,3 @@ def back_kb():
     kb = ReplyKeyboardBuilder()
     kb.button(text="Back->")
     return kb.as_markup(resize_keyboard=True)
-
-def end_task_kb():
-    kb = ReplyKeyboardBuilder()
-    kb.button(text="End->")
-    return kb.as_markup(resize_keyboard=True)
-
